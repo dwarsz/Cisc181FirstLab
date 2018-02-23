@@ -4,22 +4,92 @@ import java.util.LinkedList;
 
 public class Round {
 
-	private int ComeOutScore;
+	//private int ComeOutScore;
 	private eGameResult eGameResult;
 	private LinkedList<Roll> rolls = new LinkedList<Roll>();
-
+	
 	public Round() {
-		// TODO: Execute Come Out roll, value ComeOutScore
-
-		// TODO: Create a loop that will execute a roll until point is made, or
-		// seven-out
-
-		// TODO: value the eGameResult after the round is complete
-	}
-
+		rolls.add(new Roll());
+		
+		if (isNatural(rolls.getLast().getScore())) 
+		{
+			eGameResult = eGameResult.NATURAL;
+		}
+		else if (isCraps(rolls.getLast().getScore())) {
+			eGameResult = eGameResult.CRAPS;
+		}
+		else
+		{
+			do {
+			rolls.add(new Roll());
+				
+			} while (((rolls.getLast().getScore() != 7)) 
+					&& (rolls.getLast().getScore() != (rolls.getFirst().getScore())));
+		
+		if (rolls.getLast().getScore()==7) 
+		{
+					eGameResult = eGameResult.SEVEN_OUT;
+		}
+		else if (rolls.getLast().getScore() == (rolls.getFirst().getScore())){
+					eGameResult = eGameResult.POINT;
+							
+				}
+				
+					
+				}
+		}
+		
 	public int RollCount() {
-		// Return the roll count
-		return 0;
+		return rolls.size();
+	}
+	
+	public static boolean isNatural(int iScore) 
+	{
+		return ((iScore == 7)|| (iScore == 11));
+		}
+	
+	public static boolean isCraps(int iScore) {
+		return ((iScore == 2)|| (iScore == 3)|| (iScore == 12));
+				}
+	
+		
+	
+	//public int rolls.size()
+
+	public String ListRolls() 
+	{
+		String strRolls = new String();
+		for (Roll r: rolls)
+		{
+			strRolls = strRolls + r.getScore()+ '-';
+		
+		}
+		return strRolls;
+	}
+	
+	
+	public eGameResult geteGameResult() {
+		return eGameResult;
+	}
+	
+	public int GetFirstRoll()
+	{
+		return rolls.getFirst().getScore();
+	}
+	
+	public int GetLastRoll()
+	{
+		return rolls.getLast().getScore();
 	}
 
-}
+	public int getFirstRoll() 
+	{
+		return rolls.getFirst().getScore();
+	}
+	
+	public int getLastRoll() 
+	{
+		return rolls.getLast().getScore();
+	}
+	}
+
